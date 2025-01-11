@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./my-app  
+    ports:
+      - "3000:3000" 
+
+  backend:
+    build:
+      context: ./server  # הנתיב לתיקיית הבאקאנד שלך
+    environment:
+      - DB_HOST='mssql',
+      - DB_USER='sa'
+      - DB_PASSWORD='Tm211467691!'
+      - DB_NAME='CsvData'
+    ports:
+      - "8000:8000"  
+    depends_on:
+      - mssql 
+    networks:
+      - app_network
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD='Tm211467691!'
+    ports:
+      - "1433:1433"  
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
