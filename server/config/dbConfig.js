@@ -3,7 +3,7 @@ const sql = require('mssql');
 const config = {
     user: process.env.DB_USER,        // משתמש - tabula
     password: process.env.DB_PASSWORD,  // סיסמה למשתמש tabula
-    server: process.env.DB_HOST,      // שם השרת - כאן זה mssql (שירות ב-Docker)
+    server: process.env.DB_HOST,   
     database: process.env.DB_NAME,    // שם מסד הנתונים
     port: 1433,
     options: {
@@ -11,7 +11,6 @@ const config = {
         trustServerCertificate: true // אם יש בעיה עם תעודת השרת
     }
 };
-
 
 
 // // פונקציה שמתחברת למסד נתונים ובודקת אם טבלה קיימת

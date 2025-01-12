@@ -9,7 +9,7 @@ exports.getData = async (req, res) => {
         console.log("get start");
         
         await sql.connect(dbConfig);
-        const result = await sql.query`SELECT * FROM Terms`;  // שליפה של כל הפריטים מהטבלה Terms
+        const result = await sql.query`SELECT * FROM Terms ORDER BY term ASC`;  // שליפה של כל הפריטים מהטבלה Terms
         console.log("get",result);
         
         return res.json(result.recordset);  // שליחה חזרה לקליינט בפורמט JSON
