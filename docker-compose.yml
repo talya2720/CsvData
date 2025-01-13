@@ -6,6 +6,8 @@ services:
       context: ./my-app  
     ports:
       - "3000:3000" 
+    networks:
+      - app_network
 
   backend:
     build:
@@ -27,12 +29,11 @@ services:
      environment:
        - ACCEPT_EULA=Y
        - SA_PASSWORD=Tm211467691!
-       - MSSQL_PID=Express
      ports:
        - "1433:1433"  
      networks:
-       - app_network
+      - app_network
 
 networks:
   app_network:
-    driver: bridge
+    

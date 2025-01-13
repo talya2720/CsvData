@@ -7,7 +7,7 @@ const config = {
     database: process.env.DB_NAME,    // שם מסד הנתונים
     port: 1433,
     options: {
-        encrypt: true, // אם אתה מחובר על חיבור מאובטח
+        encrypt: false, // אם אתה מחובר על חיבור מאובטח
         trustServerCertificate: true // אם יש בעיה עם תעודת השרת
     }
 };

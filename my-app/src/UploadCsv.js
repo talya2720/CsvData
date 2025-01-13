@@ -67,7 +67,8 @@ function UploadCsv() {
                 {uploading ? 'Uploading...' : 'Upload'}
             </button>
            
-             <h2>הנתונים</h2>
+            <h2>הנתונים</h2>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
             <table border="1">
                 <thead>
                     <tr>
@@ -84,6 +85,7 @@ function UploadCsv() {
                     ))}
                 </tbody>
             </table>
+            </div>
         </div>
     );
 }
