@@ -1,7 +1,5 @@
 # CsvData
 
-# CsvData
-
 ## Overview
 CsvData is a multi-container system designed using Docker, consisting of the following components:
 - **Backend API**: A Node.js application that processes CSV file uploads, validates the data, and stores the valid records in a SQL Server database.
