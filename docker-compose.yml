@@ -5,35 +5,46 @@ services:
     build:
       context: ./my-app  
     ports:
-      - "3000:3000" 
+      - "80:80" 
     networks:
       - app_network
+    depends_on:
+      - backend
 
   backend:
     build:
       context: ./server 
     environment:
-      - DB_HOST=mssql
-      - DB_USER=sa
-      - DB_PASSWORD=Tm211467691!
-      - DB_NAME=CsvData
+      - DB_HOST=${DB_HOST}   
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     ports:
       - "8000:8000"  
     depends_on:
        - mssql 
     networks:
       - app_network
+    env_file:
+      - .env  
 
   mssql:
      image: mcr.microsoft.com/mssql/server:2019-latest 
      environment:
        - ACCEPT_EULA=Y
-       - SA_PASSWORD=Tm211467691!
+       - SA_PASSWORD=${SA_PASSWORD}
      ports:
        - "1433:1433"  
      networks:
       - app_network
+     volumes:
+      - mssql_data:/var/opt/mssql
+     env_file:
+      - .env  
 
 networks:
   app_network:
+
+volumes:
+  mssql_data:
     

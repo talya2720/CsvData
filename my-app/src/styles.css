@@ -1,0 +1,22 @@
+table {
+    margin-top: 20px; /* מוסיף רווח מעל הטבלה */
+    margin-left: auto; /* ממרכז את הטבלה לרוחב */
+    margin-right: auto; /* ממרכז את הטבלה לרוחב */
+    text-align: center; /* ממרכז את הטקסט בטבלה */
+    border-collapse: collapse; /* מבטל רווחים בין תאי הטבלה */
+  }
+  
+  table th, table td {
+    border: 1px solid black; /* מוסיף גבול לתאי הטבלה */
+    padding: 10px; /* מוסיף רווח בתוך תאי הטבלה */
+  }
+  
+  h1 {
+    text-align: center; /* ממקם את הכותרת במרכז */
+    margin-bottom: 40px; /* מוסיף רווח מתחת לכותרת */
+  }
+  
+  form {
+    text-align: center; /* ממרכז את הכפתור והקלט */
+  }
+  

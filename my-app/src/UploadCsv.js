@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './styles.css';
 
 function UploadCsv() {
     const [csvFile, setCsvFile] = useState(null);
@@ -60,16 +61,19 @@ function UploadCsv() {
     };
     
     return (
-        <div>
-            <h1>Upload CSV</h1>
+    <div>
+        <h1>Upload CSV</h1>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleFileUpload} disabled={uploading}>
                 {uploading ? 'Uploading...' : 'Upload'}
             </button>
-           
-            <h2>הנתונים</h2>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh' }}>
-            <table border="1">
+        </div>
+    
+        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>הנתונים</h2>
+        
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <table border="1" style={{ marginTop: '20px', borderCollapse: 'collapse' }}>
                 <thead>
                     <tr>
                         <th>מס' מזהה</th>
@@ -85,8 +89,8 @@ function UploadCsv() {
                     ))}
                 </tbody>
             </table>
-            </div>
         </div>
+    </div>
     );
 }
 
