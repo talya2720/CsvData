@@ -1,79 +1,123 @@
-# CsvData
+# APIAPP
 
 ## Overview
-CsvData is a multi-container system designed using Docker, consisting of the following components:
-- **Backend API**: A Node.js application that processes CSV file uploads, validates the data, and stores the valid records in a SQL Server database.
-- **Frontend**: A React-based web interface that allows users to upload CSV files and view the stored data.
-- **MSSQL Database**: A SQL Server container for storing the validated data.
+APIAPP is a web application designed with a multi-container architecture using Docker. The application includes two main components:
+- **Frontend (my-app)**: A React-based application providing the user interface for uploading data and interacting with the backend.
+- **Backend (server)**: A Node.js application that processes uploaded files, validates the data, and interacts with the database.
 
-The project is designed to be fully containerized using Docker and Docker Compose, enabling seamless management of multiple services in a single environment.
+The application is designed to be fully containerized using Docker and Docker Compose, ensuring seamless deployment and scalability.
 
 ## Features
-- **CSV Upload**: Upload CSV files through the frontend interface, which are processed by the backend.
-- **Data Validation**: The backend validates data from the CSV file and ensures only unique records are stored in the database.
-- **Data Viewing**: The frontend displays the data stored in the SQL Server database in an organized and easy-to-read format.
-- **Dockerized Setup**: The project is containerized using Docker, simplifying the process of setting up and managing the services.
-
-## Prerequisites
-Ensure you have the following software installed on your machine:
-- [Docker](https://www.docker.com/get-started) (latest version recommended)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [Visual Studio Code](https://code.visualstudio.com/) (optional, but recommended for development)
+- **Frontend**:
+  - User-friendly interface built with React.
+  - Upload and preview files before processing.
+  - Display data fetched from the backend.
+- **Backend**:
+  - File processing and validation.
+  - Handles business logic through a modular architecture (controllers, services, etc.).
+  - Configurable environment variables for flexible deployment.
+- **Dockerized Setup**:
+  - Both frontend and backend are containerized with Docker.
+  - Managed through a single `docker-compose.yml` file.
 
 ## Project Structure
 
-/CsvData │ ├── /backend # Node.js Backend API │ ├── Dockerfile # Dockerfile for the Backend API container │ ├── server.js # Main server entry point │ ├── package.json # Node.js dependencies │ ├── node_modules # Node.js modules (ignored by git) │ ├── /frontend # React Frontend │ ├── Dockerfile # Dockerfile for the Frontend container │ ├── package.json # Node.js dependencies for React │ ├── /public/ # Public assets (index.html, images, etc.) │ ├── /src/ # React components and assets │ │ ├── App.js # Main React component │ │ ├── /components/ # UI components │ │ └── /assets/ # Static files (images, fonts) │ ├── /mssql # SQL Server Database Container │ ├── Dockerfile.mssql # Dockerfile for the MSSQL Server container │ ├── /docker # Docker Compose & related configuration files │ ├── docker-compose.yml # Docker Compose file for orchestrating the containers │ ├── .gitignore # Git ignore file │ ├── README.md # This file └── └── LICENSE # Project License (e.g., MIT)
+```
+APIAPP/
+├── my-app/              # Frontend application
+│   ├── build/          # Compiled React app
+│   ├── node_modules/   # Frontend dependencies (ignored by Git)
+│   ├── public/         # Static assets (e.g., index.html, images)
+│   ├── src/            # Source code for React components
+│   │   └── ...         # Includes components and assets
+│   ├── .gitignore      # Ignore file for Git
+│   ├── Dockerfile      # Dockerfile for frontend container
+│   ├── package-lock.json
+│   ├── package.json    # Frontend dependencies
+│   └── README.md       # Frontend documentation
+├── server/             # Backend application
+│   ├── config/         # Configuration files (e.g., database setup)
+│   ├── controllers/    # Controllers managing API endpoints
+│   ├── node_modules/   # Backend dependencies (ignored by Git)
+│   ├── services/       # Business logic and helper functions
+│   ├── uploads/        # Temporary folder for uploaded files
+│   ├── .gitignore      # Ignore file for Git
+│   ├── Dockerfile      # Dockerfile for backend container
+│   ├── package-lock.json
+│   ├── package.json    # Backend dependencies
+│   ├── server.js       # Main entry point for the backend
+│   └── .env            # Environment variables
+├── .gitignore          # Global ignore file
+├── docker-compose.yml  # Docker Compose configuration file
+└── README.md           # This file
+```
 
-
-### Description of Project Components
-
-#### Backend (`/backend`)
-
-The **Backend API** is built using Node.js and handles the processing of uploaded CSV files. It performs the following tasks:
-- Validates the data in the CSV file.
-- Inserts valid records into the SQL Server database.
-- Exposes an API endpoint to interact with the frontend.
-
-- **Dockerfile**: Defines the setup and build instructions for the backend container, specifying Node.js as the base image and copying the necessary files.
-- **server.js**: The main entry point for the backend application. It handles API requests and connects to the MSSQL database.
-- **package.json**: Contains the backend dependencies (e.g., Express, Sequelize) and the necessary scripts.
-- **node_modules**: Directory containing the installed Node.js dependencies (ignored by Git).
-
-#### Frontend (`/frontend`)
-
-The **Frontend** is built using React, and it provides a user interface for uploading CSV files and viewing the stored data. It includes:
-- A form for file upload.
-- A display for showing the uploaded and stored data.
-
-- **Dockerfile**: Defines the setup for building the frontend container, specifying Node.js and React build steps.
-- **package.json**: Contains the React app's dependencies.
-- **public/**: The public assets folder that contains static files like the `index.html` template and any images or fonts.
-- **src/**: The source code for the React application, including components and assets.
-  - **App.js**: The main React component that handles the routing and rendering of the app.
-  - **components/**: Contains reusable UI components (e.g., buttons, forms, data tables).
-  - **assets/**: Stores static files like images and fonts.
-
-#### MSSQL Database (`/mssql`)
-
-The **SQL Server Database** stores the validated data. It is set up using a Docker container running Microsoft SQL Server.
-
-- **Dockerfile.mssql**: Defines the setup for the MSSQL container, including the necessary environment variables like the SA password.
-
-#### Docker & Docker Compose (`/docker`)
-
-- **docker-compose.yml**: The Docker Compose configuration file orchestrates the three services (backend, frontend, and MSSQL). It specifies the build paths, ports, networks, and service dependencies.
-
----
+## Prerequisites
+Make sure you have the following tools installed on your system:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Git](https://git-scm.com/)
 
 ## Getting Started
 
-Follow these steps to get the project up and running:
-
 ### 1. Clone the Repository
-
-Clone the repository to your local machine and navigate into the project directory:
 
 ```bash
 git clone <repository-url>
-cd <project-directory>
+cd APIAPP
+```
+
+### 2. Build and Start the Containers
+
+Run the following command to build and start the Docker containers:
+
+```bash
+docker-compose up --build
+```
+
+### 3. Access the Application
+
+- Frontend: Open your browser and navigate to `http://localhost:80`.
+- Backend: API is accessible at `http://localhost:8000`.
+
+### 4. Stop the Containers
+
+To stop the running containers, use:
+
+```bash
+docker-compose down
+```
+
+## Environment Variables
+The backend uses an `.env` file to configure the application. Below are the required environment variables:
+
+```
+PORT=8000
+DB_HOST=mssql
+DB_USER=database_user
+DB_PASSWORD=database_password
+DB_NAME=CsvData
+```
+
+## Key Files and Configuration
+
+### Frontend (`my-app`)
+- **Dockerfile**: Defines the setup for the React application.
+- **public/**: Contains static files like `index.html`.
+- **src/**: Contains React components and logic.
+
+### Backend (`server`)
+- **Dockerfile**: Defines the setup for the Node.js backend.
+- **controllers/**: API routes and endpoint logic.
+- **services/**: Business logic and helper functions.
+- **uploads/**: Directory for temporary file storage.
+- **server.js**: Main server entry point.
+
+### Docker Compose
+- **docker-compose.yml**: Orchestrates the frontend and backend containers. Configures networks, volumes, and ports.
+
+## Contributing
+Contributions are welcome! Feel free to submit a pull request or open an issue.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
